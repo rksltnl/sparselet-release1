@@ -1,2 +1,3 @@
-sparselet
+README for sparselet code
 =========
+
