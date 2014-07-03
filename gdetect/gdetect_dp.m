@@ -170,28 +170,10 @@ loc_scores = loc_w * loc_f;
 for i = 1:length(score)  
   
   score{i} = score{i} + bias + loc_scores(i);
-  % Bounded distance transform with +/- 4 HOG cells (9x9 window)
-  %[score{i}, Ix{i}, Iy{i}] = bounded_dt(score{i}, def_w(1), def_w(2), ...
-  %                                      def_w(3), def_w(4), 4);
-  
-  % Bounded distance transform with +/- 4 HOG cells (9x9 window)
-  %[score{i}, Ix{i}, Iy{i}] = bounded_dt_omp(score{i}, def_w(1), def_w(2), ...
-  %                                      def_w(3), def_w(4), 4);
-  
-  % O(n) distance transform
-  %[score{i}, Ix{i}, Iy{i}] = fh_dt(score{i}, def_w(1), def_w(2), ...
-  %                                     def_w(3), def_w(4));
   
   % O(n) distance transform + bounded
     [score{i}, Ix{i}, Iy{i}] = fast_bounded_dt(score{i}, def_w(1), def_w(2), ...
                                        def_w(3), def_w(4),4);
-
-%   [score{i}, Ix{i}, Iy{i}] = fast_bounded_dt_float(score{i}, def_w(1), def_w(2), ...
-%                                        def_w(3), def_w(4),4);       
-                                     
-  % Unbounded distance transform
-  %[score{i}, Ix{i}, Iy{i}] = dt(score{i}, def_w(1), def_w(2), ...
-  %                              def_w(3), def_w(4));
 end
 model.rules{r.lhs}(r.i).score = score;
 model.rules{r.lhs}(r.i).Ix    = Ix;

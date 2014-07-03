@@ -70,10 +70,6 @@ for level = 1:length(pyra.feat)
     s = model.sparselets.size;
     s_dimy = feat_dimy - s + 1;
     s_dimx = feat_dimx - s + 1;
-
-    %%
-%     r = tile_sparselet_resps_sse_withroots(Q, s_dimy, s_dimx, ...
-%             model.filtersizes, model.num_subfilters);
     
     % HOS: Feb15 expects model.filtersizes and model.num_subfilters
     %         to be single
