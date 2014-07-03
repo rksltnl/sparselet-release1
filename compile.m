@@ -45,36 +45,20 @@ mexcmd = [mexcmd ' LDFLAGS="\$LDFLAGS -Wall -fopenmp"'];
 
 if nargin < 3
   % Build feature vector cache code
-  fv_compile(opt, verb);
+  %fv_compile(opt, verb);
   % Build the star-cascade code
-  cascade_compile(opt, verb);
+  %cascade_compile(opt, verb);
   
   eval([mexcmd ' features/resize.cc']);
   eval([mexcmd ' features/features.cc']);
-  eval([mexcmd ' gdetect/dt.cc']);
-  eval([mexcmd ' gdetect/bounded_dt.cc']);
-  eval([mexcmd ' CXXFLAGS="\$CXXFLAGS -DNUM_THREADS=3" gdetect/bounded_dt_omp.cc']);
-  eval([mexcmd ' gdetect/fh_dt.cc']);
   eval([mexcmd ' gdetect/fast_bounded_dt.cc']);
-  eval([mexcmd ' gdetect/fast_bounded_dt_float.cc']);  
-  eval([mexcmd ' gdetect/fast_bounded_dt_profiler.cc']);  
-  eval([mexcmd ' gdetect/fast_bounded_dt_float_profiler.cc']);  
 
   eval([mexcmd ' gdetect/get_detection_trees.cc']);
   eval([mexcmd ' gdetect/compute_overlap.cc']);
-  eval([mexcmd ' gdetect/post_pad.cc']);
-  eval([mexcmd ' gdetect/post_pad_sse.cc']);
-  eval([mexcmd ' gdetect/post_pad_float.cc']);
   eval([mexcmd ' gdetect/post_pad_floatin_doubleout.cc']);
   
   eval([mexcmd ' sparselets/parse_sparse_matrix_float.cc -largeArrayDims']);
-  eval([mexcmd ' sparselets/tile_sparselet_resps.cc']);
-  eval([mexcmd ' sparselets/tile_sparselet_resps_sse.cc']);
-  eval([mexcmd ' sparselets/tile_sparselet_resps_sse_float.cc']); 
-  eval([mexcmd ' sparselets/tile_sparselet_resps_sse_withroots.cc']); 
   eval([mexcmd ' sparselets/tile_sparselet_resps_sse_withroots_float.cc']); 
-  eval([mexcmd ' sparselets/fast_sparse_mult.cc']); 
-  eval([mexcmd ' sparselets/tile_sparselet_resps_sse_infloat_outfloat.cc']);
   
   
   % Convolution routine
